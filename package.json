@@ -1,0 +1,23 @@
+{
+  "name": "twitter_app",
+  "version": "1.0.0",
+  "description": "A portfolio example app using express to communicate with the twitter api",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolasjhampton/twitter_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicolasjhampton/twitter_app/issues"
+  },
+  "homepage": "https://github.com/nicolasjhampton/twitter_app#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "oauth": "^0.9.14"
+  }
+}
