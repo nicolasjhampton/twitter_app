@@ -4,7 +4,6 @@ var express = require('express'),
     router = express.Router(),
     twitterRequest = require('./util').twitterRequest;
 
-
 var root = "https://api.twitter.com/1.1";
 
 var count = "count=5";
@@ -37,9 +36,8 @@ var renderTwitterAccount = function(req, res, next) {
   res.locals.friends = res.locals.json[1].users;
   res.locals.messages = res.locals.json[2];
 
-
   res.render('index');
-}
+};
 
 
 router.get('/', getTimeline, getFriends, getMessages, renderTwitterAccount);
