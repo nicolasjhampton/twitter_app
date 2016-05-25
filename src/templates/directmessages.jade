@@ -1,0 +1,18 @@
+ul.app--message--list
+  li
+    h3 Conversation with 
+      a #{timeline[0].user.name}
+    each message in messages
+      ul.app--message--conversation
+        if timeline[0].user.id == message.sender.id
+          li.app--message--me
+            .app--avatar(style="background-image: url(#{message.sender.profile_image_url})")
+              img(src="#{message.sender.profile_image_url}")
+            p.app--message--text #{message.text}
+            p.app--message--timestamp #{message.created_at}
+        else
+          li.app--message
+            .app--avatar(style="background-image: url(#{message.sender.profile_image_url})")
+              img(src="#{message.sender.profile_image_url}")
+            p.app--message--text #{message.text}
+            p.app--message--timestamp #{message.created_at}

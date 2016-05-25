@@ -33,7 +33,12 @@ var getMessages = function(req, res, next) {
 
 
 var renderTwitterAccount = function(req, res, next) {
-  res.send(res.locals.json);
+  res.locals.timeline = res.locals.json[0];
+  res.locals.friends = res.locals.json[1].users;
+  res.locals.messages = res.locals.json[2];
+
+
+  res.render('index');
 }
 
 
