@@ -37,5 +37,4 @@ var twitterRequest = function(obj, res, name) {
   });
 };
 
-
 module.exports.twitterRequest = twitterRequest;
