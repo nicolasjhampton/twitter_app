@@ -4,7 +4,7 @@ var OAuth = require('OAuth'),
     api = require('./apiinfo'),
     Promise = require('bluebird');
 
-
+var root = "https://api.twitter.com/1.1";
 var consumer_key = api.key;
 var consumer_secret = api.secret;
 var access_token = api.token;
@@ -21,13 +21,17 @@ var oauth = new OAuth.OAuth(
 );
 
 
-var twitterRequest = function(path, res, name) {
-  return new Promise(function(resolve, reject) {
-    console.log(name); // First call will run "timeline, friends, messages"
-    oauth.get(path, access_token, access_token_secret, function(err, json, response) {
+function createApiPath(obj) {
+  return `${root}/${obj.endpoint}.json?${obj.options.join('&')}`;
+}
+
+
+var twitterRequest = function(obj, res, name) {
+  return new Promise((resolve, reject) => {
+    var path = createApiPath(obj);
+    oauth.get(path, access_token, access_token_secret, (err, json) => {
       if(err) { return reject(err); }
       res.locals[name] = JSON.parse(json);
-      console.log(name); // Second call will be in asynchronious, random order
       resolve();
     });
   });

@@ -5,22 +5,24 @@ var express = require('express'),
     Promise = require('bluebird'),
     twitterRequest = require('./util').twitterRequest;
 
-var root = "https://api.twitter.com/1.1";
+
 var count = "count=5";
 var user = "screen_name=nicolasjhampton";
 var details = "skip_status=true&include_user_entities=false";
 
-var timeline = `${root}/statuses/user_timeline.json?${count}&${user}`;
-var friends = `${root}/friends/list.json?${count}&${user}&${details}`;
-var messages = `${root}/direct_messages.json?${count}&${details}`;
+var requests = {
+  "timeline":{"endpoint":"statuses/user_timeline", "options":[count, user]},
+  "friends":{"endpoint":"friends/list", "options":[count, user, details]},
+  "messages":{"endpoint":"direct_messages", "options":[count, details]}
+};
 
 
-var getTwitterInfo = function(req, res, next) {
-  var requests = [twitterRequest(timeline, res, "timeline"),
-                  twitterRequest(friends, res, "friends"),
-                  twitterRequest(messages, res, "messages")];
-  // Non-blocking, asynchronous request
-  Promise.all(requests).then(function() {
+var getTwitterInfo = (req, res, next) => {
+  var pending = Object.keys(requests).map(function(key) {
+    return twitterRequest(requests[key], res, key);
+  });
+  // // Non-blocking, asynchronous request
+  Promise.all(pending).then(function() {
     next();
   });
 };
