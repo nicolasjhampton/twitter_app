@@ -1,8 +1,7 @@
 'use strict';
 
 var OAuth = require('OAuth'),
-    api = require('./apiinfo'),
-    Promise = require('bluebird');
+    api = require('./apiinfo');
 
 var root = "https://api.twitter.com/1.1";
 var consumer_key = api.key;

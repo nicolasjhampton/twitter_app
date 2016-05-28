@@ -2,7 +2,6 @@
 
 var express = require('express'),
     router = express.Router(),
-    Promise = require('bluebird'),
     twitterRequest = require('./util').twitterRequest;
 
 
